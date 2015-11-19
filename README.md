@@ -4,12 +4,14 @@
 This requires tesseract for optical character recognition
 
 <h4>Debian/Ubuntu</h4>
+```bash
 apt-get install tesseract-ocr
-
+```
 <h4>CentOS</h4>
 install epel repo
+```bash
 yum install tesseract-ocr
-
+```
 <h4>Other</h4>
 Try your package manager or the source is here:
 https://github.com/tesseract-ocr/tesseract
