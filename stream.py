@@ -12,6 +12,9 @@ import shutil
 config = SafeConfigParser()
 config.read('config.ini')
 
+#Unsubscribe string, case sensitive
+unsub_str='@Snowden Meow, I <3 catfacts'
+
 #Twitter API credentials: Fill them into config.ini, or replace the config.gets with yours.
 access_token = config.get('api_credentials', 'access_token')
 access_token_secret = config.get('api_credentials', 'access_token_secret')
@@ -35,7 +38,8 @@ class StdOutListener(StreamListener):
                     print(tweet['text'].encode('utf-8'))
                     print(raw_number)
                     print(raw_number+':'+tweet['user']['id_str'], file=fh)
-            elif '@Snowden Meow, I <3 catfacts' in tweet['text']:
+            #This is the unsub condition, feel free to remove the entire elif condition to disable it
+            elif unsub_str in tweet['text']:
                 with open("numbers.txt","r") as input:
                     with open("tmp_numbers.txt","wb") as output: 
                         for line in input:
