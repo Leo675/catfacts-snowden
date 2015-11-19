@@ -1,7 +1,9 @@
 # catfacts-snowden
 
 <h2>Installation</h2>
-This requires tesseract for optical character recognition
+This requires tesseract for optical character recognition to automate a captcha.
+
+Also it requires tor to be running and havign torsocks. It checks for tor, but not much else is written for good error messages. 
 
 <h4>Debian/Ubuntu</h4>
 ```bash
