@@ -26,7 +26,7 @@ edit the config.ini: input your twitter application's API credentials.
 
 https://apps.twitter.com/
 
-Near the top of woem.sh, there is an unsub variable. You can change it but keep it under 52 characters, and use +'s for spaces.
+Near the top of both scripts, there is an unsub variable. You can change it but keep it under 52 characters, and use +'s for spaces in woem.sh. If you want to disable unsubscribing, remove the elif construct at the bottom of on_data.
 
 <h2>Usage</h2>
 The stream API does output full tweets, but only the raw numbers will be saved in numbers.txt. Either run it in screen or a seperate terminal or direct the output to /dev/null
