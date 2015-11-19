@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ -z "$(ps -e | grep tor)" ]]
+then
+    echo 'tor not running, Requires torsocks too'
+    exit 0
+fi
+
 cwd=$(pwd)
 list_of_numbers="$cwd/numbers.txt"
 
