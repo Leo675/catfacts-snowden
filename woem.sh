@@ -127,6 +127,5 @@ do
         send_message 'Verizon+USA' "$number" &
         send_message 'Virgin+Mobile+USA' "$number" &
         sleep 8
-    done <<< "$(tac $list_of_numbers)"
+    done <<< "$(tac $list_of_numbers | cut -d':' -f1)"
 done
-
