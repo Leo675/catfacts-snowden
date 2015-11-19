@@ -7,6 +7,7 @@ from tweepy import Stream
 from ConfigParser import SafeConfigParser
 import json
 import re
+import shutil
 
 config = SafeConfigParser()
 config.read('config.ini')
@@ -23,20 +24,25 @@ open('user_log.txt', 'a').close
 
 class StdOutListener(StreamListener):
     def on_data(self, data):
-        if '"text":' in data:      
+        if '"text":' in data:
             tweet = json.loads(data)
             regex = '[^0][\s\(\-.]?([2-9]{1}[0-9]{2})[\s\)\-.]?[\s\(\-.]?([0-9]{3})[\s\)\-.]?[\s\(\-.]?([0-9]{4})[^0-9]'
             number = re.search(regex, tweet['text'])
             if number is not None:
-
                 raw_number = number.group(1)+number.group(2)+number.group(3)
                 fh = open('numbers.txt', 'r+a')
                 if raw_number not in fh.read():
                     print(tweet['text'].encode('utf-8'))
                     print(raw_number)
-                    print(raw_number, file=fh)
-
-
+                    print(raw_number+':'+tweet['user']['id_str'], file=fh)
+            elif '@Snowden Meow, I <3 catfacts' in tweet['text']:
+                with open("numbers.txt","r") as input:
+                    with open("tmp_numbers.txt","wb") as output: 
+                        for line in input:
+                            if tweet['user']['id_str'] not in line:
+                                output.write(line)
+                shutil.move('tmp_numbers.txt', 'numbers.txt')
+            
     def on_error(self, status):
         print(status)
 
@@ -46,4 +52,4 @@ if __name__ == '__main__':
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
-    stream.filter(track=['my number is', 'her number is', 'his number is', 'call me', 'text me'])
+    stream.filter(track=['my number is', 'her number is', 'his number is', 'call me', 'text me', '@snowden Meow, I <3 catfacts'])
