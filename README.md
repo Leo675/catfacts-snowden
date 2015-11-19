@@ -5,14 +5,17 @@ This requires tesseract for optical character recognition to automate a captcha.
 
 It also requires tor to be running and having torsocks. It checks for tor, but not much else is written for good error messages. 
 
+The stream.py script uses the tweepy library for the twitter API
 <h4>Debian/Ubuntu</h4>
 ```bash
 apt-get install tesseract-ocr
+pip install tweepy
 ```
 <h4>CentOS</h4>
 install epel repo
 ```bash
 yum install tesseract-ocr
+pip install tweepy
 ```
 <h4>Other</h4>
 Try your package manager or the source is here:
